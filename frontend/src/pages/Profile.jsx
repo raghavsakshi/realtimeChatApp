@@ -36,7 +36,7 @@ try {
     }
     
         console.log("Uploading:", {name, hasImage: !!backendImage}); 
-    let result = await axios.put(`${serverUrl}/api/user/profile`, formData ,
+    let result = await axios.put(`${"https://realtimechatapp-xmug.onrender.com"}/api/user/profile`, formData ,
         {withCredentials:true})
     setSaving(false)
     dispatch(setUserData(result.data))

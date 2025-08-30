@@ -14,13 +14,13 @@ function SignUp() {
       let [loading,setLoading]=useState(false)
        let [err,setErr]=useState("")
        let dispatch =useDispatch()
-   
+  
 
   const handleSignUp=async (e)=>{
     e.preventDefault()
     setLoading(true)
     try{
-      let result=await axios.post(`${serverUrl}/api/auth/signup`,{
+      let result=await axios.post(`$"https://realtimechatapp-xmug.onrender.com"}/api/auth/signup`,{
 userName,email,password
       },{withCredentials:true  })
  dispatch(setUserData(result.data))
