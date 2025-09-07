@@ -20,7 +20,7 @@ function Login() {
     e.preventDefault()
     setLoading(true)
     try{
-      let result=await axios.post(`${"https://realtimechatapp-xmug.onrender.com"}/api/auth/login`,{
+      let result=await axios.post(`${serverUrl}/api/auth/login`,{
 email,password
       },{withCredentials:true  })
       

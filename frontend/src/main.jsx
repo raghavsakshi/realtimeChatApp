@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { store } from './redux/store.js';
 
 // Backend server URL
-export const serverUrl = "https://realtimechatapp-xmug.onrender.com";
+export const serverUrl = "http://localhost:5000";
 
 const container = document.getElementById('root');
 const root = createRoot(container);

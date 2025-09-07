@@ -16,10 +16,13 @@ export const getCurrentUser = async (req ,res) =>{
 
 export const editProfile = async (req, res) => {
     try {
+        console.log("Profile update request received"); // Debug log
+        console.log("User ID:", req.userId); // Debug log
         console.log("File received:", req.file); // Debug log
         let {name} = req.body
+        console.log("Name from body:", name); // Debug log
         let updateData = { name };
-        
+
         if(req.file){
             console.log("Uploading to cloudinary:", req.file.path); // Debug log
             try {
@@ -32,11 +35,12 @@ export const editProfile = async (req, res) => {
                 return res.status(500).json({message: `Image upload error: ${error.message}`})
             }
         }
-        
+
         let user = await User.findByIdAndUpdate(req.userId, updateData, {new:true}).select("-password")
         if(!user){
             return res.status(400).json({message:"user not found"})
         }
+        console.log("Profile updated successfully:", user); // Debug log
         return res.status(200).json(user)
     } catch (error) {
         console.log("Profile update error:", error); // Debug log

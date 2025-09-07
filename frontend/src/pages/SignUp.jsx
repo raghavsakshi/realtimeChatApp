@@ -19,20 +19,22 @@ function SignUp() {
   const handleSignUp=async (e)=>{
     e.preventDefault()
     setLoading(true)
+    console.log("Attempting signup with:", {userName, email, password});
     try{
-      let result=await axios.post(`$"https://realtimechatapp-xmug.onrender.com"}/api/auth/signup`,{
+      let result=await axios.post(`${serverUrl}/api/auth/signup`,{
 userName,email,password
       },{withCredentials:true  })
- dispatch(setUserData(result.data))
- navigate("/profile")
+      console.log("Signup successful:", result.data);
+  dispatch(setUserData(result.data))
+  navigate("/profile")
       setUserName("")
       setEmail("")
       setPassword("")
       setLoading(false)
       setErr("")
-      
+
     } catch (error) {
-     console.log (error)
+     console.log("Signup error:", error.response?.data || error.message);
      setLoading(false)
      setErr(error?.response?.data?.message)
     }

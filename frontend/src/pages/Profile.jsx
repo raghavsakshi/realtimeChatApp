@@ -34,17 +34,20 @@ try {
     if(backendImage){
         formData.append("image",backendImage)
     }
-    
-        console.log("Uploading:", {name, hasImage: !!backendImage}); 
-    let result = await axios.put(`${"https://realtimechatapp-xmug.onrender.com"}/api/user/profile`, formData ,
+
+        console.log("Uploading:", {name, hasImage: !!backendImage});
+        console.log("Server URL being used:", serverUrl); // Debug log
+    let result = await axios.put(`${serverUrl}/api/user/profile`, formData ,
         {withCredentials:true})
+    console.log("Profile update response:", result.data); // Debug log
     setSaving(false)
     dispatch(setUserData(result.data))
-   
+
     navigate("/")
 } catch (error) {
 
-        console.log("Uploading:", {name, hasImage: !!backendImage});
+        console.log("Profile update error:", error); // Debug log
+        console.log("Error response:", error.response); // Debug log
     setSaving(false)
         // Add error state to show user what went wrong
     setError(error?.response?.data?.message || "Failed to save profile")

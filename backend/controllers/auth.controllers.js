@@ -7,16 +7,20 @@ import bcrypt from "bcryptjs"
 export const signUp = async (req ,res) =>{
     try {
         const { userName,email,password } =req.body
+        console.log("Signup request received:", {userName, email});
         const checkUserByUserName = await User.findOne({userName})
         if(checkUserByUserName ){
+            console.log("Username already exists");
             return res.status(400).json({message :"userName already exists"})
         }
         const checkUserByUserEmail = await User.findOne({email})
         if(checkUserByUserEmail){
+            console.log("Email already exists");
             return res.status(400).json({message :"email already exists"})
         }
 
 if (password.length<6){
+    console.log("Password too short");
     return res.status(400).json({message:"password must be atleast 6 characters"})
 }
 
@@ -27,6 +31,7 @@ const user =await User.create({
     email,
     password:hashedPassword
 })
+console.log("User created:", user._id);
 const token = await genToken(user._id)
 res.cookie("token",token,{
     httpOnly:true,
@@ -37,6 +42,7 @@ res.cookie("token",token,{
 return res.status(201).json(user)
 
     } catch (error) {
+        console.log("Signup error:", error);
         return res.status(500).json({message:`signup error ${error}`})
     }
 }

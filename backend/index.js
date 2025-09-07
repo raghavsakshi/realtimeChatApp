@@ -11,8 +11,8 @@ import { app, server } from './socket/socket.js';
 const port = process.env.PORT || 5000
 
 app.use(cors({
-    origin:"chattingapplication1234.netlify.app",
-    credentials:true    
+    origin:"http://localhost:5173",
+    credentials:true
 }))
 app.use(express.json())
 //cookie pass

@@ -85,17 +85,22 @@ return ()=>socket.off("newMessage")
     <EmojiPicker width={250} height={350} className="shadow-lg z-[100]"
 onEmojiClick={onEmojiClick}/> </div>}
 
- {messages && messages.map((mess, index)=>(
-<div key={mess._id || index}>
-{mess.sender==userData._id?<SenderMessage image={mess.image} message={mess.message}/>
-:<ReceiverMessage image={mess.image} message={mess.message}/>}
-</div>
-))}
+ {messages && messages.length > 0 ? messages.map((mess, index)=>(
+ <div key={mess._id || index}>
+ {mess.sender==userData._id?<SenderMessage image={mess.image} message={mess.message}/>
+ :<ReceiverMessage image={mess.image} message={mess.message}/>}
+ </div>
+ )) : (
+ <div className="w-full h-full justify-center flex flex-col items-center">
+ <h1 className="text-gray-700 font-bold text-[50px]">Welcome to Zapchat</h1>
+ <span className="text-gray-700 font-semibold text-[30px]">Start chatting!</span>
+ </div>
+ )}
 
       </div>
     </div>}
      {!selectedUser && <div className="w-full h-full justify-center flex flex-col items-center">
-        <h1 className="text-gray-700 font-bold text-[50x] ">Welcome to Zapchat</h1>
+        <h1 className="text-gray-700 font-bold text-[50x]  ">Welcome to Zapchat</h1>
         <span className="text-gray-700 font-semibold text-[30x]"> Chat Friendly !</span>
         </div>}
 
